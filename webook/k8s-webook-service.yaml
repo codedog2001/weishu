@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: webook-live
+spec:
+  selector:
+    app: webook-live
+  ports:
+    - protocol: TCP
+      name: http
+      #port可以随便换 targetport要跟路由端口保持一致，还要和deployment保持一致，三口合一
+      port: 81
+      targetPort: 8080
+  type: LoadBalancer
+  

@@ -1,0 +1,18 @@
+#相当于对持久化卷进行一些声明
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+#这个是指的是 mysql有什么
+  name: webook-mysql-live-claim
+  labels:
+    app: webook-mysql-live-claim
+spec:
+#这个可以随便取名
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+#1GB
+       storage: 1Gi
+  

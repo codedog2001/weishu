@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webook-live-mysql
+  labels:
+    app: webook-live-mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webook-live-mysql
+  template:
+    metadata:
+      name: webook-live-mysql
+      labels:
+        app: webook-live-mysql
+    spec:
+      containers:
+        - name: webook-live-mysql
+          image: mysql:8.0
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+          imagePullPolicy: IfNotPresent
+#可以定义多个持久化卷，但是要选择一个，所以name要对上
+          volumeMounts:
+#这边要对应到mysql的数据存储的位置
+            - mountPath: /var/lib/mysql
+              name: mysql-storage
+          ports:
+            - containerPort: 3306
+      restartPolicy: Always
+      volumes:
+        - name: mysql-storage
+          persistentVolumeClaim:
+            claimName: webook-mysql-live-claim
+
+
+      

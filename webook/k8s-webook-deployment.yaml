@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+# 用apps/v1协议来解读这个配置
+kind: Deployment
+metadata:
+  name: webook-live
+  labels:
+    app: webook-live
+spec:
+  #副本数量
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webook-live
+#template 描述的是你的pod是什么样子的
+  template:
+    metadata:
+      name: webook-live
+      labels:
+        #这个appname要跟上面metadataname 对的上
+        app: webook-live
+    spec:
+      containers:
+        - name: webook-live
+          image: zx/webook-live:v0.0.1
+          ports:
+          - containerPort: 8080
+            #这个port要跟路由启动的端口一致

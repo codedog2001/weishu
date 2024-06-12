@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: webook-live-mysql
+spec:
+  selector:
+    app: webook-live-mysql
+  ports:
+    - protocol: TCP
+      #这个端口是我自己访问用的
+      #相当于我访问service ，service再去访问pod
+      port: 11309
+      #targetport要跟deployment中port对应上
+      targetPort: 3306
+  type: LoadBalancer
+#我访问mysql，先去访问service暴露给我的端口30002，再去映射3306
+#webook去访问mysql时，先去访问service暴露给weboodkpods的端口11309，再去映射到3306
+#redis和mysql都是一样的操作，service暴露出来的操作不同

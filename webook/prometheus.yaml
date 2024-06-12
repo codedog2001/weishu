@@ -1,0 +1,8 @@
+scrape_configs:
+  - job_name: "webook"
+#    每隔五秒抓取一次，抓取超时时间为3秒
+    scrape_interval: 5s
+    scrape_timeout: 3s
+    static_configs:
+#      在8081端口上可以查看到prometheus的监控数据
+      - targets: [ "host.docker.internal:8081" ]
