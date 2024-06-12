@@ -394,14 +394,11 @@ func (h *ArticleHandler) Like100(ctx *gin.Context) {
 	}
 	//转成切片后返回
 	ctx.JSON(http.StatusOK, Result{
-		Data: slice.Map[domain.Article, ArticleVo](articles, func(idx int, src domain.Article) ArticleVo {
-			return ArticleVo{
-				Id:       src.Id,
-				Title:    src.Title,
-				Abstract: src.Abstract(),
-				AuthorId: src.Author.Id,
-				Status:   src.Status.ToUint8(),
-				Ctime:    src.Ctime.Format(time.DateTime),
+		Data: slice.Map[domain.Like100, ArticleLike100](articles, func(idx int, src domain.Like100) ArticleLike100 {
+			return ArticleLike100{
+				LikeCnt: src.LikeCnt,
+				Biz:     src.Biz,
+				BizId:   src.BizId,
 			}
 		}),
 	})

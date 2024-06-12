@@ -17,3 +17,8 @@ type ArticleVo struct {
 	Liked      bool  `json:"liked"`
 	Collected  bool  `json:"collected"`
 }
+type ArticleLike100 struct {
+	LikeCnt int64 `json:"likeCnt"`
+	Biz     string
+	BizId   int64
+}
